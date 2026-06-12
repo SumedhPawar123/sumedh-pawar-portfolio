@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../model/User");
 
+// protected function - check token in headers
 exports.protect = async (req, res, next) => {
     let token;
 
@@ -35,6 +36,7 @@ exports.protect = async (req, res, next) => {
     }
 }
 
+// Only admin can proceed further
 exports.adminOnly = (req, res, next) => {
     if(req.user && res.user.role === "admin"){
         next();
