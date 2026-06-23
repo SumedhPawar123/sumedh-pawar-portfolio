@@ -6,7 +6,7 @@ const connectDB = require('./config/db,')
 dotenv.config()
 
 const app = express()
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 5000
 
 // Middleware
 app.use(express.json())
