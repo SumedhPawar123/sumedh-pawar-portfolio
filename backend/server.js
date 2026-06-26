@@ -3,6 +3,8 @@ const http = require('http')
 const dotenv = require('dotenv')
 const cors = require('cors')
 const connectDB = require('./config/db')
+const authRoute = require("./route/authRoute")
+const skillsRoute = require('./route/skillsRoute')
 dotenv.config()
 
 const app = express()
@@ -14,6 +16,10 @@ app.use(express.json())
 
 // Database Connection
 connectDB();
+
+// APIS
+app.use("/api/auth", authRoute);
+app.use("/api/skills", skillsRoute)
 
 // Create Server
 const server = http.createServer(app)
