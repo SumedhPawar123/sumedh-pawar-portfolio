@@ -1,5 +1,6 @@
-const Contact = require("../model/Contact")
-const nodemailer = require("nodemailer")
+const Contact = require("../model/Contact");
+const { sendEmailNotification } = require("../utils/sendEmail");
+
 
 // Submit Contact Form Public Side
 exports.submitContact = async (req, res, next) => {
@@ -19,6 +20,8 @@ exports.submitContact = async (req, res, next) => {
             message,
             ipAddress: req.ip
         })
+
+        sendEmailNotification(contact).catch(console.error)
 
         res.status(201).json({
             success: true,
@@ -79,3 +82,4 @@ exports.markAsRead = async (req, res, next) => {
         next(error)
     }
 }
+
