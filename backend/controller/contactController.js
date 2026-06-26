@@ -5,7 +5,7 @@ const { sendEmailNotification } = require("../utils/sendEmail");
 // Submit Contact Form Public Side
 exports.submitContact = async (req, res, next) => {
     try {
-        const { name, email, subject, message } = req.body;
+        const { name, email,phone, subject, message } = req.body;
 
         if (!name || !email || !subject || !message) {
             const error = new Error("All fields are required")
@@ -16,6 +16,7 @@ exports.submitContact = async (req, res, next) => {
         const contact = await Contact.create({
             name,
             email,
+            phone,
             subject,
             message,
             ipAddress: req.ip

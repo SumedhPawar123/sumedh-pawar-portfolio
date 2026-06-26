@@ -6,7 +6,7 @@ const router = express.Router();
 // Submit message
 // Public
 
-router.post('/submit', submitContact);
+router.post('/', submitContact);
 
 // get all contacts
 router.get('/', protect, adminOnly, getMessage);

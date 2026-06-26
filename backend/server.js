@@ -6,6 +6,7 @@ const connectDB = require('./config/db')
 const authRoute = require("./route/authRoute")
 const skillsRoute = require('./route/skillsRoute')
 const projectRoute = require('./route/projectRoute')
+const contactRoute = require('./route/contactRoute')
 dotenv.config()
 
 const app = express()
@@ -19,9 +20,13 @@ app.use(express.json())
 connectDB();
 
 // APIS
+app.get('/', (req, res)=>{
+    res.send("portfolio look fine")
+})
 app.use("/api/auth", authRoute);
 app.use("/api/skills", skillsRoute)
 app.use('/api/projects', projectRoute)
+app.use('/api/contacts', contactRoute)
 
 // Create Server
 const server = http.createServer(app)

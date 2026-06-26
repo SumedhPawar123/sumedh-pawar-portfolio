@@ -30,7 +30,7 @@ exports.createProject = async (req, res, next) => {
             data: project
         })
     } catch (error) {
-        next(Error)
+        next(error)
     }
 }
 
@@ -62,7 +62,7 @@ exports.getProjectById = async (req, res, next) => {
         const project = await Project.findById(id);
 
         if(!project){
-            return res.status(400).json({
+            return res.status(404).json({
                 success: false,
                 message: 'project is not found'
             })
@@ -109,7 +109,7 @@ exports.updateProject = async (req, res, next) => {
 
 // delete project
 // /api/project/:id
-exports.deleteProject = (req, res, next) => {
+exports.deleteProject = async (req, res, next) => {
     const { id } = req.params;
 
     try {
