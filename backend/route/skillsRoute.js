@@ -13,4 +13,6 @@ router.post("/create", protect, adminOnly, createSkills);
 router.put("/:id",protect, adminOnly, updateSkill);
 
 // delete skills
-router.delete("/:id", protect, adminOnly, deleteSkill)
+router.delete("/:id", protect, adminOnly, deleteSkill);
+
+module.exports = router;
