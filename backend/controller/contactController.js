@@ -1,5 +1,5 @@
 const Contact = require("../model/Contact");
-const { sendEmailNotification } = require("../utils/sendEmail");
+const { sendEmailNotification, sendAutoReply } = require("../utils/sendEmail");
 
 
 // Submit Contact Form Public Side
@@ -22,7 +22,8 @@ exports.submitContact = async (req, res, next) => {
             ipAddress: req.ip
         })
 
-        sendEmailNotification(contact).catch(console.error)
+        sendEmailNotification(contact).catch(console.error);
+        sendAutoReply(contact).catch(console.error);
 
         res.status(201).json({
             success: true,
