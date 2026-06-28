@@ -76,7 +76,7 @@ const Footer = ({ isDark }) => {
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <p className={`text-sm flex items-center gap-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            Made with <Heart size={16} className="text-red-500" /> © {currentYear} Your Name
+            Made with <Heart size={16} className="text-red-500" /> © {currentYear} Sumedh Pawar
           </p>
           <div className="flex gap-6 text-sm">
             <a href="#" className={`transition-colors ${isDark ? 'text-gray-400 hover:text-cyan-400' : 'text-gray-600 hover:text-blue-600'}`}>

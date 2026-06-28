@@ -5,7 +5,7 @@ export const submitContactForm = createAsyncThunk(
   'contact/submitForm',
   async (formData, { rejectWithValue }) => {
     try {
-      const response = await apiCall('/api/contact', {
+      const response = await apiCall('/api/contacts', {
         method: 'POST',
         body: JSON.stringify(formData),
         headers: {

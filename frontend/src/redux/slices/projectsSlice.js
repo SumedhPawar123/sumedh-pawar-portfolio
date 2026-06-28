@@ -5,7 +5,7 @@ export const fetchProjects = createAsyncThunk(
   'projects/fetchProjects',
   async (filters = {}, { rejectWithValue }) => {
     try {
-      let url = '/api/project';
+      let url = '/api/projects';
       const params = new URLSearchParams();
       
       if (filters.category) params.append('category', filters.category);

@@ -70,16 +70,7 @@ const Hero = ({ isDark }) => {
               {/* Placeholder for profile image */}
               <div className={`w-full h-full ${isDark ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-gray-100 to-gray-200'} flex items-center justify-center`}>
                 <div className="text-center">
-                  {/* <svg
-                    className={`w-32 h-32 mx-auto ${isDark ? 'text-gray-700' : 'text-gray-300'}`}
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-                  </svg>
-                  <p className={`mt-4 text-sm ${isDark ? 'text-gray-600' : 'text-gray-400'}`}>
-                    Update with your photo
-                  </p> */}
+                 
                   <img src="../../public/profile.png" alt="my-profile" />
                 </div>
               </div>
