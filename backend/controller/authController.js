@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
 
 const generateToken = (id) => {
-    return jwt.sign({id}, process.env.SECRET_KEY, {expiresIn: '1d'});
+    return jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: '1d'});
 }
 
 // @desc    Register admin (first time setup)
