@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 const http = require('http')
 const dotenv = require('dotenv')
 const cors = require('cors')
@@ -14,7 +15,7 @@ const PORT = process.env.PORT
 
 // Middleware
 app.use(express.json())
-
+app.use(express.urlencoded({ extended: true }));
 
 // Database Connection
 connectDB();
@@ -27,6 +28,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/skills", skillsRoute)
 app.use('/api/projects', projectRoute)
 app.use('/api/contacts', contactRoute)
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Create Server
 const server = http.createServer(app)

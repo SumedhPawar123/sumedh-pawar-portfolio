@@ -1,133 +1,333 @@
-const { Error } = require('mongoose');
-const Project = require('../model/Project')
+// const { Error } = require('mongoose');
+// const Project = require('../model/Project')
+
+// // create a project
+// exports.createProject = async (req, res, next) => {
+//     const { title, description, shortDesc, techStack, githubUrl, liveUrl, imageUrl, category } = req.body;
+
+//     try {
+//         if (!title || !description) {
+//             return res.status(400).json({
+//                 success: false,
+//                 message: 'project title & description is required'
+//             })
+//         }
+
+//         const project = await Project.create({
+//             title,
+//             description,
+//             shortDesc,
+//             techStack,
+//             githubUrl,
+//             liveUrl,
+//             imageUrl,
+//             category
+//         })
+
+//         res.status(200).json({
+//             success: true,
+//             message: 'project created successfully',
+//             data: project
+//         })
+//     } catch (error) {
+//         next(error)
+//     }
+// }
+
+// // get all projects
+// exports.getProjects = async (req, res, next) => {
+//     try {
+//         const { category, featured } = req.query;
+//         const filter = {};
+
+//         if (category) filter.category = category;
+//         if (featured === 'true') filter.featured = true
+
+//         const projects = await Project.find(filter).sort({ order: 1, createdAt: -1 })
+
+//         res.status(200).json({
+//             success: true,
+//             count: projects.length,
+//             data: projects,
+//         })
+//     } catch (error) {
+//         next(error)
+//     }
+// }
+
+// // get project by Id
+// exports.getProjectById = async (req, res, next) => {
+//     const { id } = req.params;
+//     try {
+//         const project = await Project.findById(id);
+
+//         if(!project){
+//             return res.status(404).json({
+//                 success: false,
+//                 message: 'project is not found'
+//             })
+//         }
+
+//         res.status(200).json({
+//             success: true,
+//             data: project
+//         })
+//     } catch (error) {
+//         next(error)
+//     }
+// }
+
+// // Update existing project
+// exports.updateProject = async (req, res, next) => {
+//     const { id } = req.params;
+
+//     try {
+//         const project = await Project.findByIdAndUpdate(
+//             id,
+//             req.body,
+//             { new: true,
+//                 runValidators: true
+//             }
+//         )
+
+//         if(!project){
+//             return res.status(404).json({
+//                 success: false,
+//                 message: 'project is not found'
+//             })
+//         }
+
+//         res.status(200).json({
+//             success: true,
+//             message: 'project update successfully',
+//             data: project
+//         })
+//     } catch (error) {
+//         next(error)
+//     }
+// }
+
+// // delete project
+// // /api/project/:id
+// exports.deleteProject = async (req, res, next) => {
+//     const { id } = req.params;
+
+//     try {
+//         const project = await Project.findById(id)
+//         if(!project){
+//             return res.status(404).json({
+//                 success: false,
+//                 message: 'project is not found'
+//             })
+//         }
+
+//         await project.deleteOne()
+
+//         res.status(200).json({
+//             success: true,
+//             message: 'project deleted successfully'
+//         })
+//     } catch (error) {
+//         next(error)
+//     }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const Project = require("../model/Project");
 
 // create a project
 exports.createProject = async (req, res, next) => {
-    const { title, description, shortDesc, techStack, githubUrl, liveUrl, imageUrl, category } = req.body;
+  try {
+    const {
+      title,
+      description,
+      shortDesc,
+      githubUrl,
+      liveUrl,
+      category,
+      featured,
+      order,
+    } = req.body;
 
-    try {
-        if (!title || !description) {
-            return res.status(400).json({
-                success: false,
-                message: 'project title & description is required'
-            })
-        }
+    // handle techStack
+    let techStack = req.body.techStack || [];
 
-        const project = await Project.create({
-            title,
-            description,
-            shortDesc,
-            techStack,
-            githubUrl,
-            liveUrl,
-            imageUrl,
-            category
-        })
-
-        res.status(200).json({
-            success: true,
-            message: 'project created successfully',
-            data: project
-        })
-    } catch (error) {
-        next(error)
+    // if techStack comes as comma-separated string from form-data
+    if (typeof techStack === "string") {
+      techStack = techStack.split(",").map((item) => item.trim()).filter(Boolean);
     }
-}
+
+    // image from multer
+    const imageUrl = req.file ? `/uploads/projects/${req.file.filename}` : "";
+
+    if (!title || !description) {
+      return res.status(400).json({
+        success: false,
+        message: "Project title and description are required",
+      });
+    }
+
+    const project = await Project.create({
+      title,
+      description,
+      shortDesc,
+      techStack,
+      githubUrl,
+      liveUrl,
+      imageUrl,
+      category,
+      featured: featured === "true" || featured === true,
+      order: order || 0,
+    });
+
+    res.status(201).json({
+      success: true,
+      message: "Project created successfully",
+      data: project,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 // get all projects
 exports.getProjects = async (req, res, next) => {
-    try {
-        const { category, featured } = req.query;
-        const filter = {};
+  try {
+    const { category, featured } = req.query;
+    const filter = {};
 
-        if (category) filter.category = category;
-        if (featured === 'true') filter.featured = true
+    if (category) filter.category = category;
+    if (featured === "true") filter.featured = true;
 
-        const projects = await Project.find(filter).sort({ order: 1, createdAt: -1 })
+    const projects = await Project.find(filter).sort({ order: 1, createdAt: -1 });
 
-        res.status(200).json({
-            success: true,
-            count: projects.length,
-            data: projects,
-        })
-    } catch (error) {
-        next(error)
-    }
-}
+    res.status(200).json({
+      success: true,
+      count: projects.length,
+      data: projects,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
-// get project by Id
+// get project by id
 exports.getProjectById = async (req, res, next) => {
-    const { id } = req.params;
-    try {
-        const project = await Project.findById(id);
+  const { id } = req.params;
 
-        if(!project){
-            return res.status(404).json({
-                success: false,
-                message: 'project is not found'
-            })
-        }
+  try {
+    const project = await Project.findById(id);
 
-        res.status(200).json({
-            success: true,
-            data: project
-        })
-    } catch (error) {
-        next(error)
+    if (!project) {
+      return res.status(404).json({
+        success: false,
+        message: "Project not found",
+      });
     }
-}
 
-// Update existing project
+    res.status(200).json({
+      success: true,
+      data: project,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// update project
 exports.updateProject = async (req, res, next) => {
-    const { id } = req.params;
+  const { id } = req.params;
 
-    try {
-        const project = await Project.findByIdAndUpdate(
-            id,
-            req.body,
-            { new: true,
-                runValidators: true
-            }
-        )
+  try {
+    let project = await Project.findById(id);
 
-        if(!project){
-            return res.status(404).json({
-                success: false,
-                message: 'project is not found'
-            })
-        }
-
-        res.status(200).json({
-            success: true,
-            message: 'project update successfully',
-            data: project
-        })
-    } catch (error) {
-        next(error)
+    if (!project) {
+      return res.status(404).json({
+        success: false,
+        message: "Project not found",
+      });
     }
-}
+
+    const {
+      title,
+      description,
+      shortDesc,
+      githubUrl,
+      liveUrl,
+      category,
+      featured,
+      order,
+    } = req.body;
+
+    let techStack = req.body.techStack;
+
+    if (typeof techStack === "string") {
+      techStack = techStack.split(",").map((item) => item.trim()).filter(Boolean);
+    }
+
+    // update fields only if provided
+    if (title !== undefined) project.title = title;
+    if (description !== undefined) project.description = description;
+    if (shortDesc !== undefined) project.shortDesc = shortDesc;
+    if (githubUrl !== undefined) project.githubUrl = githubUrl;
+    if (liveUrl !== undefined) project.liveUrl = liveUrl;
+    if (category !== undefined) project.category = category;
+    if (order !== undefined) project.order = order;
+    if (featured !== undefined) {
+      project.featured = featured === "true" || featured === true;
+    }
+    if (techStack !== undefined) project.techStack = techStack;
+
+    // if new image uploaded
+    if (req.file) {
+      project.imageUrl = `/uploads/projects/${req.file.filename}`;
+    }
+
+    await project.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Project updated successfully",
+      data: project,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 // delete project
-// /api/project/:id
 exports.deleteProject = async (req, res, next) => {
-    const { id } = req.params;
+  const { id } = req.params;
 
-    try {
-        const project = await Project.findById(id)
-        if(!project){
-            return res.status(404).json({
-                success: false,
-                message: 'project is not found'
-            })
-        }
+  try {
+    const project = await Project.findById(id);
 
-        await project.deleteOne()
-
-        res.status(200).json({
-            success: true,
-            message: 'project deleted successfully'
-        })
-    } catch (error) {
-        next(error)
+    if (!project) {
+      return res.status(404).json({
+        success: false,
+        message: "Project not found",
+      });
     }
-}
+
+    await project.deleteOne();
+
+    res.status(200).json({
+      success: true,
+      message: "Project deleted successfully",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
