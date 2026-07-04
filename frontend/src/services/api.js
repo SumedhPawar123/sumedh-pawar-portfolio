@@ -1,51 +1,35 @@
-// services/api.js
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const apiCall = async (endpoint, options = {}) => {
   const defaultOptions = {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   };
 
-  const config = { ...defaultOptions, ...options };
+  const config = {
+    ...defaultOptions,
+    ...options,
+    headers: {
+      ...defaultOptions.headers,
+      ...options.headers,
+    },
+  };
 
-  const token = localStorage.getItem('authToken');
-  if (token && !config.headers.Authorization) {
+  const token = localStorage.getItem("authToken");
+
+  if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
 
-  try {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
+  const response = await fetch(`${API_URL}${endpoint}`, config);
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || `HTTP Error: ${response.status}`);
-    }
+  const data = await response.json();
 
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    throw error;
+  if (!response.ok) {
+    throw new Error(data.message || "Something went wrong");
   }
-};
 
-export const downloadResume = async (resumeUrl) => {
-  try {
-    const response = await fetch(resumeUrl);
-    const blob = await response.blob();
-    
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    window.URL.revokeObjectURL(url);
-  } catch (error) {
-    console.error('Error downloading resume:', error);
-    throw error;
-  }
+  return data;
 };
