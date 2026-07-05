@@ -64,7 +64,7 @@ const Projects = ({ isDark }) => {
         {/* Projects Grid */}
         {!loading && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project) => (
+            { Array.isArray(filteredProjects) && filteredProjects.map((project) => (
               <div
                 key={project._id}
                 className={`rounded-xl overflow-hidden transition-all duration-300 hover:transform hover:-translate-y-3 ${
@@ -77,7 +77,7 @@ const Projects = ({ isDark }) => {
                 <div className={`h-48 overflow-hidden ${isDark ? 'bg-gray-800' : 'bg-gray-200'}`}>
                   {project.imageUrl ? (
                     <img
-                      src={project.imageUrl}
+                      src={`http://localhost:5000${project.imageUrl}`}
                       alt={project.title}
                       className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                     />
