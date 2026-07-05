@@ -1,13 +1,14 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { apiCall } from '../../services/api';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { apiCall } from "../../services/api";
 
 export const fetchSkills = createAsyncThunk(
-  'skills/fetchSkills',
-  async (category = null, { rejectWithValue }) => {
+  "skills/fetchSkills",
+  async (_, { rejectWithValue }) => {
     try {
-      const url = category ? `/api/skills?category=${category}` : '/api/skills';
-      const response = await apiCall(url);
-      return response.data;
+      const response = await apiCall("/api/skills");
+
+      // backend returns { success, count, data }
+      return Array.isArray(response.data) ? response.data : [];
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -15,18 +16,13 @@ export const fetchSkills = createAsyncThunk(
 );
 
 const skillsSlice = createSlice({
-  name: 'skills',
+  name: "skills",
   initialState: {
     items: [],
     loading: false,
     error: null,
-    selectedCategory: null,
   },
-  reducers: {
-    setSelectedCategory: (state, action) => {
-      state.selectedCategory = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchSkills.pending, (state) => {
@@ -40,9 +36,9 @@ const skillsSlice = createSlice({
       .addCase(fetchSkills.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+        state.items = [];
       });
   },
 });
 
-export const { setSelectedCategory } = skillsSlice.actions;
 export default skillsSlice.reducer;
