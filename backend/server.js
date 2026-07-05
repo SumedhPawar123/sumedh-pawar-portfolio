@@ -16,6 +16,12 @@ const PORT = process.env.PORT
 // Middleware
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
+app.use(
+  cors({
+    origin: "http://localhost:5173", // frontend URL
+    credentials: true,
+  })
+);
 
 // Database Connection
 connectDB();

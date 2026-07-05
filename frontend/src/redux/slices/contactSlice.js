@@ -1,16 +1,13 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { apiCall } from '../../services/api';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { apiCall } from "../../services/api";
 
 export const submitContactForm = createAsyncThunk(
-  'contact/submitForm',
+  "contact/submitForm",
   async (formData, { rejectWithValue }) => {
     try {
-      const response = await apiCall('/api/contacts', {
-        method: 'POST',
-        body: JSON.stringify(formData),
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const response = await apiCall("/api/contacts", {
+        method: "POST",
+        data: formData,
       });
       return response;
     } catch (error) {
@@ -20,7 +17,7 @@ export const submitContactForm = createAsyncThunk(
 );
 
 const contactSlice = createSlice({
-  name: 'contact',
+  name: "contact",
   initialState: {
     loading: false,
     error: null,
