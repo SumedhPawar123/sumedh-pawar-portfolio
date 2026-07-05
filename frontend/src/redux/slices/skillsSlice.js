@@ -19,10 +19,24 @@ const skillsSlice = createSlice({
   name: "skills",
   initialState: {
     items: [],
+    filteredSkills: [],
+    selectedCategory: "all",
     loading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    setSelectedCategory: (state, action) => {
+      state.selectedCategory = action.payload;
+
+      if (action.payload === "all") {
+        state.filteredSkills = state.items;
+      } else {
+        state.filteredSkills = state.items.filter(
+          (skill) => skill.category === action.payload
+        );
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchSkills.pending, (state) => {
@@ -32,13 +46,16 @@ const skillsSlice = createSlice({
       .addCase(fetchSkills.fulfilled, (state, action) => {
         state.loading = false;
         state.items = action.payload;
+        state.filteredSkills = action.payload;
       })
       .addCase(fetchSkills.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
         state.items = [];
+        state.filteredSkills = [];
       });
   },
 });
 
+export const { setSelectedCategory } = skillsSlice.actions;
 export default skillsSlice.reducer;
