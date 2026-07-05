@@ -10,7 +10,7 @@ const skillSchema = new mongoose.Schema({
         type: String,
         required: true,
         enum: ['frontend', 'backend', 'database', 'tools', 'authentication', 'others'],
-        default: 'other'
+        default: 'others'
     },
     proficiency: {
         type: Number,

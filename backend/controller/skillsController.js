@@ -36,7 +36,7 @@ exports.getSkills = async (req, res, next) => {
         const { category } = req.query;
         const filter = category ? { category } : {};
 
-        const skills = (await Skills.find(filter)).sort({ order: 1, category: 1 })
+        const skills = await Skills.find(filter).sort({ order: 1, category: 1 });
 
         res.status(200).json({
             success: true,
