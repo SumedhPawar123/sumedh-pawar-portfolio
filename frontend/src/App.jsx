@@ -39,7 +39,7 @@ function App() {
     <Provider store={store}>
       <div className={`min-h-screen ${isDark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}>
         <Navbar isDark={isDark} toggleTheme={toggleTheme} />
-        <main className="pt-20">
+        <main className="pt-17">
           <Hero isDark={isDark} />
           <About isDark={isDark} />
           <Skills isDark={isDark} />
