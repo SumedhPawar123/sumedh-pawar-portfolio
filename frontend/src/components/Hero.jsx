@@ -72,7 +72,7 @@ const Hero = ({ isDark }) => {
               <div className={`w-full h-full ${isDark ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-gray-100 to-gray-200'} flex items-center justify-center`}>
                 <div className="text-center">
                  
-                  <img src="../../public/profile.png" alt="my-profile" />
+                  <img src="profile.png" alt="my-profile" />
                 </div>
               </div>
 

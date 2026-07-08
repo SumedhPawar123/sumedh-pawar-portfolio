@@ -1,14 +1,16 @@
 import React from 'react';
-import { Computer, Link, ArrowLeftRight , Mail, Heart } from 'lucide-react';
+import { Computer, Mail, Heart } from 'lucide-react';
+import { FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
 
 const Footer = ({ isDark }) => {
   const currentYear = new Date().getFullYear();
+  const phoneNumber = "919527192987"
 
   const socialLinks = [
-    { icon: Computer, href: '#', label: 'Computer' },
-    { icon: Link, href: '#', label: 'Link' },
-    { icon: ArrowLeftRight , href: '#', label: 'ArrowLeftRight ' },
-    { icon: Mail, href: '#', label: 'Email' }
+    { icon: FaWhatsapp, href: `https://wa.me/${phoneNumber}`, label: 'Whatsapp' },
+    { icon: FaLinkedin, href: 'https://www.linkedin.com/in/sumedh-pawar-39778b291/', label: 'Linkedin' },
+    { icon: FaGithub , href: 'https://github.com/SumedhPawar123', label: 'Github ' },
+    { icon: Mail, href: 'mailto:psumedh59@gmail.com', label: 'Email' }
   ];
 
   return (
@@ -47,7 +49,7 @@ const Footer = ({ isDark }) => {
 
           {/* Social Links */}
           <div className="flex flex-col items-center md:items-end">
-            <h4 className="font-semibold mb-4">Follow Me</h4>
+            <h4 className="font-semibold mb-4">Get in Touch | Follow Me</h4>
             <div className="flex gap-4">
               {socialLinks.map((link, index) => {
                 const Icon = link.icon;
