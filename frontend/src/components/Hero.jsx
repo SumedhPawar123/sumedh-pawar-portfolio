@@ -1,5 +1,6 @@
 import React from 'react';
-import { ArrowRight, Computer, Link, Mail } from 'lucide-react';
+import { ArrowRight, Mail } from 'lucide-react';
+import { FaLinkedin, FaGithub } from "react-icons/fa"
 
 const Hero = ({ isDark }) => {
   return (
@@ -52,13 +53,13 @@ const Hero = ({ isDark }) => {
 
             {/* Social Links */}
             <div className="flex gap-4 justify-center md:justify-start">
-              <a href="#" className={`p-3 rounded-full transition-all duration-300 ${isDark ? 'bg-gray-800 text-cyan-400 hover:bg-gray-700 hover:text-white' : 'bg-gray-100 text-blue-600 hover:bg-gray-200'}`}>
-                <Computer size={24} />
+              <a href="https://github.com/SumedhPawar123" target='_blank' className={`p-3 rounded-full transition-all duration-300 ${isDark ? 'bg-gray-800 text-cyan-400 hover:bg-gray-700 hover:text-white' : 'bg-gray-100 text-blue-600 hover:bg-gray-200'}`}>
+                <FaGithub size={24} />
               </a>
-              <a href="#" className={`p-3 rounded-full transition-all duration-300 ${isDark ? 'bg-gray-800 text-cyan-400 hover:bg-gray-700 hover:text-white' : 'bg-gray-100 text-blue-600 hover:bg-gray-200'}`}>
-                <Link size={24} />
+              <a href="https://www.linkedin.com/in/sumedh-pawar-39778b291/" target='_blank' className={`p-3 rounded-full transition-all duration-300 ${isDark ? 'bg-gray-800 text-cyan-400 hover:bg-gray-700 hover:text-white' : 'bg-gray-100 text-blue-600 hover:bg-gray-200'}`}>
+                <FaLinkedin size={24} />
               </a>
-              <a href="#" className={`p-3 rounded-full transition-all duration-300 ${isDark ? 'bg-gray-800 text-cyan-400 hover:bg-gray-700 hover:text-white' : 'bg-gray-100 text-blue-600 hover:bg-gray-200'}`}>
+              <a href="mailto:psumedh59@gmail.com" className={`p-3 rounded-full transition-all duration-300 ${isDark ? 'bg-gray-800 text-cyan-400 hover:bg-gray-700 hover:text-white' : 'bg-gray-100 text-blue-600 hover:bg-gray-200'}`}>
                 <Mail size={24} />
               </a>
             </div>
