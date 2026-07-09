@@ -6,11 +6,21 @@ export const fetchSkills = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await apiCall("/api/skills");
+      console.log("skills response =>", response);
 
-      // backend returns { success, count, data }
-      return Array.isArray(response.data) ? response.data : [];
+      // Case 1: apiCall returns { success, count, data }
+      if (Array.isArray(response?.data)) {
+        return response.data;
+      }
+
+      // Case 2: apiCall returns axios response -> { data: { success, count, data } }
+      if (Array.isArray(response?.data?.data)) {
+        return response.data.data;
+      }
+
+      return [];
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
 );

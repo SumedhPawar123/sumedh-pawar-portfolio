@@ -4,7 +4,7 @@ import { fetchSkills, setSelectedCategory } from '../redux/slices/skillsSlice';
 
 const Skills = ({ isDark }) => {
   const dispatch = useDispatch();
-  const { items, loading, selectedCategory } = useSelector((state) => state.skills);
+  const { filteredSkills, loading, selectedCategory } = useSelector((state) => state.skills);
 
   useEffect(() => {
     dispatch(fetchSkills());
@@ -20,10 +20,6 @@ const Skills = ({ isDark }) => {
     'others'
   ];
 
-  const filteredSkills = selectedCategory === 'all'
-    ? items
-    : items.filter(skill => skill.category === selectedCategory);
-
   const groupedSkills = filteredSkills.reduce((acc, skill) => {
     if (!acc[skill.category]) {
       acc[skill.category] = [];
@@ -33,7 +29,7 @@ const Skills = ({ isDark }) => {
   }, {});
 
   const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
+    dispatch(setSelectedCategory(category));
   };
 
   const getProficiencyColor = (proficiency) => {
@@ -45,7 +41,6 @@ const Skills = ({ isDark }) => {
   return (
     <section id="skills" className={`py-20 ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Title */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Skills & Expertise</h2>
           <div className={`h-1 w-20 ${isDark ? 'bg-gradient-to-r from-cyan-400 to-blue-500' : 'bg-gradient-to-r from-blue-600 to-cyan-500'} mx-auto`}></div>
@@ -54,35 +49,33 @@ const Skills = ({ isDark }) => {
           </p>
         </div>
 
-        {/* Category Filter Buttons */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
           {categories.map((category) => (
             <button
               key={category}
-              onClick={() => setSelectedCategory(category === 'all' ? 'all' : category)}
-              className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 capitalize ${selectedCategory === category || (selectedCategory === null && category === 'all')
+              onClick={() => handleCategoryClick(category)}
+              className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 capitalize ${
+                selectedCategory === category
                   ? isDark
                     ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg shadow-cyan-500/50'
                     : 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-500/50'
                   : isDark
-                    ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                }`}
+                  ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
             >
               {category}
             </button>
           ))}
         </div>
 
-        {/* Loading State */}
         {loading && (
           <div className="flex justify-center items-center py-12">
             <div className={`animate-spin rounded-full h-12 w-12 border-b-2 ${isDark ? 'border-cyan-500' : 'border-blue-500'}`}></div>
           </div>
         )}
 
-        {/* Skills Grid */}
-        {!loading && (
+        {!loading && filteredSkills.length > 0 && (
           <div className="space-y-12">
             {Object.entries(groupedSkills).map(([category, skills]) => (
               <div key={category}>
@@ -91,10 +84,11 @@ const Skills = ({ isDark }) => {
                   {skills.map((skill) => (
                     <div
                       key={skill._id}
-                      className={`p-6 rounded-xl transition-all duration-300 hover:transform hover:-translate-y-2 ${isDark
+                      className={`p-6 rounded-xl transition-all duration-300 hover:transform hover:-translate-y-2 ${
+                        isDark
                           ? 'bg-gray-800 border border-gray-700 hover:border-cyan-500/50'
                           : 'bg-gray-50 border border-gray-200 hover:border-blue-500/50'
-                        }`}
+                      }`}
                     >
                       <div className="flex items-center justify-between mb-4">
                         <h4 className="text-lg font-semibold">{skill.name}</h4>
@@ -107,7 +101,6 @@ const Skills = ({ isDark }) => {
                         )}
                       </div>
 
-                      {/* Proficiency Bar */}
                       <div className="mb-4">
                         <div className="flex justify-between items-center mb-2">
                           <span className={`text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
@@ -136,7 +129,6 @@ const Skills = ({ isDark }) => {
           </div>
         )}
 
-        {/* Empty State */}
         {!loading && filteredSkills.length === 0 && (
           <div className="text-center py-12">
             <p className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
