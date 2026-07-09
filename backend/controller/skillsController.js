@@ -2,7 +2,7 @@ const Skills = require("../model/Skills")
 
 // create skills
 exports.createSkills = async (req, res, next) => {
-    const { name, category, proficiency, icon, order } = req.body;
+    const { name, category, proficiency, order } = req.body;
 
     try {
         if (!name || !category) {
@@ -16,8 +16,8 @@ exports.createSkills = async (req, res, next) => {
             name,
             category,
             proficiency,
-            icon,
-            order
+            order,
+            icon: req.file ? `/uploads/skills/${req.file.filename}` : ""
         })
 
         res.status(201).json({
@@ -53,9 +53,17 @@ exports.updateSkill = async (req, res, next) => {
     try {
         const { id } = req.params;
 
+        const updateData = {
+            ...req.body
+        };
+
+        if(req.file){
+            updateData.icon = `/uploads/skills/${req.file.filename}`;
+        }
+
         const skill = await Skills.findByIdAndUpdate(
             id,
-            req.body,
+            updateData,
             {
                 new: true,
                 runValidators: true
