@@ -20,8 +20,8 @@ const Skills = ({ isDark }) => {
     'others'
   ];
 
-  const filteredSkills = selectedCategory === 'all' 
-    ? items 
+  const filteredSkills = selectedCategory === 'all'
+    ? items
     : items.filter(skill => skill.category === selectedCategory);
 
   const groupedSkills = filteredSkills.reduce((acc, skill) => {
@@ -60,15 +60,14 @@ const Skills = ({ isDark }) => {
             <button
               key={category}
               onClick={() => setSelectedCategory(category === 'all' ? 'all' : category)}
-              className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 capitalize ${
-                selectedCategory === category || (selectedCategory === null && category === 'all')
+              className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 capitalize ${selectedCategory === category || (selectedCategory === null && category === 'all')
                   ? isDark
                     ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg shadow-cyan-500/50'
                     : 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-500/50'
                   : isDark
-                  ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
+                    ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
             >
               {category}
             </button>
@@ -92,16 +91,19 @@ const Skills = ({ isDark }) => {
                   {skills.map((skill) => (
                     <div
                       key={skill._id}
-                      className={`p-6 rounded-xl transition-all duration-300 hover:transform hover:-translate-y-2 ${
-                        isDark
+                      className={`p-6 rounded-xl transition-all duration-300 hover:transform hover:-translate-y-2 ${isDark
                           ? 'bg-gray-800 border border-gray-700 hover:border-cyan-500/50'
                           : 'bg-gray-50 border border-gray-200 hover:border-blue-500/50'
-                      }`}
+                        }`}
                     >
                       <div className="flex items-center justify-between mb-4">
                         <h4 className="text-lg font-semibold">{skill.name}</h4>
                         {skill.icon && (
-                          <span className="text-3xl">{skill.icon}</span>
+                          <img
+                            src={`http://localhost:5000${skill.icon}`}
+                            alt={skill.name}
+                            className="w-10 h-10 object-contain"
+                          />
                         )}
                       </div>
 

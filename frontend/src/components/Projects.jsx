@@ -67,7 +67,7 @@ const Projects = ({ isDark }) => {
             { Array.isArray(filteredProjects) && filteredProjects.map((project) => (
               <div
                 key={project._id}
-                className={`rounded-xl overflow-hidden transition-all duration-300 hover:transform hover:-translate-y-3 ${
+                className={`rounded-xl overflow-hidden transform transition-all duration-[1200ms] ease-out hover:-translate-y-3 hover:shadow-2xl ${
                   isDark
                     ? 'bg-gray-900 border border-gray-700 hover:border-cyan-500/50'
                     : 'bg-white border border-gray-200 hover:border-blue-500/50 shadow-md hover:shadow-xl'
