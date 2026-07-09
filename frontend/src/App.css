@@ -1,8 +1,9 @@
 /* App.css */
 
 /* Smooth scrolling */
-html {
+html, body {
   scroll-behavior: smooth;
+  scrollbar-width: none; 
 }
 
 
