@@ -21,9 +21,6 @@ const Hero = ({ isDark }) => {
               </span>
             </div>
 
-            {/* <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-              Hi, I'm <span className={`${isDark ? 'bg-gradient-to-r from-cyan-400 to-blue-500' : 'bg-gradient-to-r from-blue-600 to-cyan-500'} bg-clip-text text-transparent`}>Sumedh Pawar</span>
-            </h1> */}
             <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
               Hi, I'm <span className={`${isDark ? 'bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500' : 'bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-400'} bg-clip-text text-transparent`}>Sumedh Pawar</span>
             </h1>
