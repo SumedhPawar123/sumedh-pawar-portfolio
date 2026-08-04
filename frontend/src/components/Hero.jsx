@@ -95,7 +95,7 @@ const Hero = ({ isDark }) => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
         </svg>
       </div>
-      <h1>Sumedh Pawar</h1>
+      
     </section>
   );
 };
