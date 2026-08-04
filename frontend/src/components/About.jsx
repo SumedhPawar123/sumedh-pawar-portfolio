@@ -417,6 +417,7 @@ const About = ({ isDark }) => {
           })}
         </motion.div>
       </div>
+      <h1>Sumedh Pawar</h1>
     </section>
   );
 };
