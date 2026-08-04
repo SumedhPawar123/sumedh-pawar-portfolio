@@ -3,7 +3,7 @@ import skillsReducer from './slices/skillsSlice';
 import projectsReducer from './slices/projectsSlice';
 import contactReducer from './slices/contactSlice';
 import authReducer from './slices/authSlice';
-sumedh
+
 
 const store = configureStore({
   reducer: {
