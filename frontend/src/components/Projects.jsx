@@ -113,6 +113,8 @@ const Projects = ({ isDark }) => {
                     {project.shortDesc || project.description}
                   </p>
 
+                  <h1>Project tech</h1>
+
                   {/* Tech Stack */}
                   {project.techStack && project.techStack.length > 0 && (
                     <div className="mb-4">
