@@ -13,6 +13,6 @@ const store = configureStore({
     auth: authReducer,
   },
 });
-sumedh
+
 
 export default store;
