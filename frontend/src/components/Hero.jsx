@@ -83,6 +83,7 @@ const Hero = ({ isDark }) => {
           </div>
         </div>
       </div>
+      <h1>Sumedh pawar</h1>
 
       {/* Scroll indicator */}
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
