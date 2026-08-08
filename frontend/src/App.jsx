@@ -9,6 +9,7 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import './App.css';
+import MouseGlow from './components/MouseGlow';
 
 function App() {
   const [isDark, setIsDark] = useState(true);
@@ -37,6 +38,8 @@ function App() {
 
   return (
     <Provider store={store}>
+      <MouseGlow/>
+
       <div className={`min-h-screen ${isDark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}>
         <Navbar isDark={isDark} toggleTheme={toggleTheme} />
         <main className="pt-17">

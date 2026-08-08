@@ -50,7 +50,6 @@ const contactSlice = createSlice({
         state.success = false;
       });
   },
-  
 });
 
 export const { resetContactState } = contactSlice.actions;
