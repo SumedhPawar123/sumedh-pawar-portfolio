@@ -7,4 +7,5 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />
   </StrictMode>,
+  <h1>Sumedh</h1>
 )
