@@ -64,6 +64,7 @@ export default function MouseGlow() {
   const dotRef = useRef(null);
   const ringRef = useRef(null);
 
+  
   const mouse = useRef({
     x: window.innerWidth / 2,
     y: window.innerHeight / 2,
