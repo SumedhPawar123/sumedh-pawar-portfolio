@@ -12,6 +12,7 @@ const Navbar = ({ isDark, toggleTheme }) => {
     { label: 'Contact', href: '#contact' },
   ];
 
+
   const handleResumeDownload = () => {
     // Update this URL with your actual resume URL
     const resumeUrl = '/resume.pdf';
@@ -34,6 +35,8 @@ const Navbar = ({ isDark, toggleTheme }) => {
             </div>
             <span className={`text-xl font-bold hidden sm:inline ${isDark ? 'text-white' : 'text-gray-900'}`}>Portfolio</span>
           </a>
+
+          <h1>Sumedh</h1>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
