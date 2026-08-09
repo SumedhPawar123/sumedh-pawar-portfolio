@@ -113,6 +113,8 @@ const Contact = ({ isDark }) => {
           </p>
         </div>
 
+        <h1></h1>
+
         {/* Contact Form */}
         <div className={`rounded-2xl p-8 md:p-12 ${isDark ? 'bg-gray-800' : 'bg-gray-50'} border ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
           {/* Success Message */}
