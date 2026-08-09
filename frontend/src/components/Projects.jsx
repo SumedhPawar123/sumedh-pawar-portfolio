@@ -36,6 +36,7 @@ const Projects = ({ isDark }) => {
             Showcase of my recent work and contributions
           </p>
         </div>
+        
 
         {/* Category Filter Buttons */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
