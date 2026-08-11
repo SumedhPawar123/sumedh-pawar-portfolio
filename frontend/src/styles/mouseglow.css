@@ -46,6 +46,8 @@
   }
 } */
 
+
+
 .cursor-dot {
   position: fixed;
 
@@ -159,6 +161,157 @@
 @media (hover: none) {
   .cursor-dot,
   .cursor-ring {
+    display: none;
+  }
+}
+
+/* =========================================
+   MAIN CURSOR DOT
+========================================= */
+
+.cursor-dot {
+  position: fixed;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  pointer-events: none;
+
+  z-index: 100001;
+
+  transform: translate(-50%, -50%);
+
+  box-shadow:
+    0 0 8px rgba(255, 255, 255, 1),
+    0 0 15px rgba(150, 80, 255, 1),
+    0 0 30px rgba(120, 60, 255, 0.8);
+
+  will-change: transform;
+
+  transition:
+    width 0.2s ease,
+    height 0.2s ease;
+}
+
+
+/* =========================================
+   STAR PARTICLES
+========================================= */
+
+.cursor-star {
+  position: fixed;
+
+  left: 0;
+  top: 0;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  pointer-events: none;
+
+  z-index: 100000;
+
+  opacity: 0.8;
+
+  will-change: transform;
+
+  box-shadow:
+    0 0 5px rgba(255, 255, 255, 1),
+    0 0 10px rgba(160, 90, 255, 0.9),
+    0 0 20px rgba(120, 60, 255, 0.6);
+
+  animation: starTwinkle
+    ease-in-out infinite;
+}
+
+
+/* =========================================
+   STAR TWINKLE
+========================================= */
+
+@keyframes starTwinkle {
+
+  0% {
+    opacity: 0.2;
+    transform:
+      translate(-50%, -50%)
+      scale(0.5);
+  }
+
+  50% {
+    opacity: 1;
+    transform:
+      translate(-50%, -50%)
+      scale(1.5);
+  }
+
+  100% {
+    opacity: 0.2;
+    transform:
+      translate(-50%, -50%)
+      scale(0.5);
+  }
+
+}
+
+
+/* =========================================
+   SPECIAL STAR SHAPES
+========================================= */
+
+.cursor-star:nth-child(5n) {
+  border-radius: 0;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(45deg);
+
+  box-shadow:
+    0 0 5px #ffffff,
+    0 0 12px rgba(180, 110, 255, 1),
+    0 0 22px rgba(130, 70, 255, 0.8);
+}
+
+
+/* =========================================
+   BIGGER STARS
+========================================= */
+
+.cursor-star:nth-child(9n) {
+  width: 4px !important;
+  height: 4px !important;
+
+  box-shadow:
+    0 0 5px #ffffff,
+    0 0 15px rgba(180, 120, 255, 1),
+    0 0 30px rgba(120, 60, 255, 0.8);
+}
+
+
+/* =========================================
+   HIDE ON MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+  .cursor-dot,
+  .cursor-star {
+    display: none;
+  }
+}
+
+
+/* =========================================
+   TOUCH DEVICES
+========================================= */
+
+@media (hover: none) {
+  .cursor-dot,
+  .cursor-star {
     display: none;
   }
 }
