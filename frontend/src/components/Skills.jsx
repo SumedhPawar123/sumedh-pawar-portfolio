@@ -46,6 +46,7 @@ const Skills = ({ isDark }) => {
              <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
              & Expertise
             </span>
+            <h1>S</h1>
           </h2>
           <div className={`h-1 w-30 ${isDark ? 'bg-gradient-to-r from-cyan-400 to-blue-500' : 'bg-gradient-to-r from-blue-600 to-cyan-500'} mx-auto`}></div>
           <p className={`text-lg mt-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
