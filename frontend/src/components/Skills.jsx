@@ -52,7 +52,7 @@ const Skills = ({ isDark }) => {
           <p className={`text-lg mt-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
             Technologies and tools I work with
           </p>
-          <span>new</span>
+          
         </div>
 
         <div className="flex flex-wrap justify-center gap-3 mb-12">
