@@ -38,6 +38,7 @@ const projectSchema = new mongoose.Schema({
     type: String,
     enum: ['fullstack', 'frontend', 'backend', 'mobile', 'other'],
     default: 'fullstack'
+    
   },
   order: {
     type: Number,
