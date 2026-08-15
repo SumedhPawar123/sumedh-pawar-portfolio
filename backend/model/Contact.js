@@ -20,6 +20,7 @@ const contactSchema = new mongoose.Schema({
         type: String,
         required: [true, 'phone number is required'],
         match: [/^(?:\+91[-\s]?|91[-\s]?|0)?[6-9]\d{9}$/, 'invalid phone no format']
+        
     },
     subject: {
         type: String,
