@@ -50,8 +50,6 @@ const register = async (req, res, next) => {
     }
 }
 
-
-
 // Login 
 const login = async (req, res) => {
     try {
