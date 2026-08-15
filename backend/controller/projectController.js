@@ -174,7 +174,7 @@ exports.deleteProject = async (req, res, next) => {
         message: "Project not found",
       });
     }
-
+ 
     await project.deleteOne();
 
     res.status(200).json({
