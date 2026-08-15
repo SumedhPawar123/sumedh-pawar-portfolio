@@ -38,6 +38,7 @@ const register = async (req, res, next) => {
             role: "admin"
         })
 
+        
         const token = generateToken(user._id);
 
         res.status(201).json({
