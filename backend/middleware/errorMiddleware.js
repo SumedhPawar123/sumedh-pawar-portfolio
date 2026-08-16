@@ -27,7 +27,6 @@ const errorHandler = (err, req, res, next) => {
     message = Object.values(err.errors).map(e => e.message).join(', ');
   }
 
-  
   res.status(statusCode).json({
     success: false,
     message,
