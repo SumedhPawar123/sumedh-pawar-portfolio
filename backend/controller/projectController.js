@@ -175,6 +175,7 @@ exports.deleteProject = async (req, res, next) => {
       });
     }
  
+    
     await project.deleteOne();
 
     res.status(200).json({
