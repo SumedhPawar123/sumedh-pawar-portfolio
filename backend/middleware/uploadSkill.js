@@ -26,6 +26,7 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
+
 const uploadSkill = multer({
   storage,
   fileFilter,
