@@ -79,7 +79,6 @@ exports.markAsRead = async (req, res, next) => {
             data: message
         })
 
-
     } catch (error) {
         next(error)
     }
