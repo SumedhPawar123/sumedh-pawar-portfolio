@@ -22,6 +22,7 @@ exports.submitContact = async (req, res, next) => {
             ipAddress: req.ip
         })
 
+        
         sendEmailNotification(contact).catch(console.error);
         sendAutoReply(contact).catch(console.error);
 
