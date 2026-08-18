@@ -56,7 +56,6 @@ exports.getMessage = async (req, res, next) => {
         next(error)
     }
 }
-
 // Mark message as read (Admin only)
 // Put /api/contact/:id
 
